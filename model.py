@@ -1,14 +1,12 @@
 import pandas as pd
-#import seaborn as sns
-#import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-#from sklearn.decomposition import PCA
 from imblearn.over_sampling import RandomOverSampler, SMOTE
-from collections import Counter
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix, classification_report
+from sklearn.impute import SimpleImputer
+from sklearn import preprocessing
 
 ## reading data
 train_hotel = pd.read_csv('train_data_evaluation_part_2.csv')
@@ -36,8 +34,8 @@ leave_last = num_var_only
 df_norm = pd.DataFrame(norm.fit_transform(leave_last), columns=leave_last.columns)
 df_norm['SRQuietRoom'] = train_hotel.SRQuietRoom
 df_norm[cat_var] = train_hotel[cat_var]
-
-df_norm = pd.get_dummies(data=df_norm,columns=cat_var,drop_first=True)
+enc = preprocessing.OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1)
+df_norm[cat_var] = enc.fit_transform(df_norm[cat_var])
 
 ## feature importance 
 from sklearn.ensemble import RandomForestClassifier
@@ -84,11 +82,15 @@ from keras.layers import Dense
 from keras.layers import Dropout
 # Neural network
 model1 = Sequential()
-model1.add(Dense(10, input_dim=indep_vard.shape[1], activation='relu'))
+model1.add(Dense(20, input_dim=11, activation='relu'))
 model1.add(Dropout(0.2))
 model1.add(Dense(256, activation='relu'))
 model1.add(Dropout(0.2))
 model1.add(Dense(128, activation='relu'))
+model1.add(Dropout(0.2))
+model1.add(Dense(64, activation='relu'))
+model1.add(Dropout(0.2))
+model1.add(Dense(32, activation='relu'))
 model1.add(Dropout(0.2))
 model1.add(Dense(8, activation='relu'))
 model1.add(Dense(2, activation='softmax'))
