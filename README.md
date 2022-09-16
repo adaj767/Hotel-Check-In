@@ -1,5 +1,5 @@
 ## Hotel Check-In
-The project is deployed on Heroku <link>
+The project is deployed on Heroku <link>.
 To deploy on Heroku:
 1. Save the trained model in a pickle file to directly access it and test on new data.
 2. Create a flask form for the api and upload it on github.
