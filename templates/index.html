@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict customer checking in</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	Age: <input type="text" name="Age" placeholder="Age" required="required" />
+        <br/><br/>
+        Days Since Creation: <input type="text" name="days_creation" placeholder="Days since creation" required="required" />
+        <br/><br/>
+	Average Lead Time: <input type="text" name="avg_lead_time" placeholder="Average Lead Time" required="required" />
+        <br/><br/>
+        Lodging Revenue: <input type="text" name="lodging_revenue" placeholder="Lodging Revenue" required="required" />
+        <br/><br/>
+        Other Revenue: <input type="text" name="other_revenue" placeholder="Other Revenue" required="required" />
+        <br/><br/>
+        Persons Nights: <input type="text" name="persons_nights" placeholder="Persons Nights" required="required" />
+        <br/><br/>
+        SR High Floor: <input type="text" name="high_floor" placeholder="High Floor" required="required" />
+        <br/><br/>
+        SR King Size Bed: <input type="text" name="king_bed" placeholder="King size Bed" required="required" />
+        <br/><br/>
+        SR TwinBed: <input type="text" name="twin_bed" placeholder="Twin Bed" required="required" />
+        <br/><br/>
+        Natinality: <input type="text" name="nationality" placeholder="Nationality" required="required" />
+        <br/><br/>
+        Market Segment: <input type="text" name="market_segment" placeholder="Market Segment" required="required" />
+        <br/><br/>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
